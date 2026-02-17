@@ -1,0 +1,14 @@
+services:
+  database:
+    image: mysql:8.3
+    container_name: database
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: database
+      MYSQL_USER: database_user
+      MYSQL_PASSWORD: secret
+
+volumes:
+  mysql_data:
