@@ -23,7 +23,10 @@ class AuthController extends Controller
   
         try {
             return response()->json([
-                'token' => $this->authService->login($validated['email'], $validated['password']),
+                'token' => $this->authService->login(
+                    $validated['email'], 
+                    $validated['password'],
+                ),
             ], 200);
         } catch (Exception $e) {
             return response()->json([

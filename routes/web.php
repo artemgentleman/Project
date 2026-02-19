@@ -4,13 +4,15 @@ declare(strict_types= 1);
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use Illuminate\View\View;
 
-Route::get('/', function (): View {
+Route::get('/', function () {
     return view('welcome');
 });
 
-Route::prefix('auth')->group(function (): void {
-    Route::get('/register', [AuthController::class, 'register']);
-    Route::get('/login', [AuthController::class, 'login']);
-});
+// Route::prefix('auth')->group(function () {
+//     Route::get('/register', [AuthController::class, 'register']);
+//     Route::get('/login', [AuthController::class, 'login']);
+// });
+
+Route::get('/register', [AuthController::class, 'register']);
+Route::get('/login', [AuthController::class, 'login']);
