@@ -2,7 +2,10 @@
 
 namespace App\Providers;
 
+use App\Repositories\UserRepository;
 use Illuminate\Support\ServiceProvider;
+use App\Services\IAuthService;
+use App\Services\AuthService;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -11,7 +14,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->singleton(IAuthService::class, function (Application $app) {
+            return new AuthService(new UserRepository());
+        });
     }
 
     /**

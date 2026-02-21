@@ -5,13 +5,14 @@ declare(strict_types=1);
 namespace App\Services;
 
 use App\Models\User;
-use App\Repositories\UserRepository;
+use App\Repositories\IRepository;
 use Exception;
 use Illuminate\Support\Facades\Hash;
+use App\Services\IAuthService;
 
-class AuthService
+class AuthService implements IAuthService
 {
-    public function __construct(public UserRepository $userRepository)
+    public function __construct(public IRepository $userRepository)
     {
         $this->userRepository = $userRepository;
     }
@@ -21,7 +22,7 @@ class AuthService
         /**
          * @var User|null $user
          */
-        $user = $this->userRepository->getByEmail($email);
+        $user = $this->userRepository->getBy($email);
 
         if (!$user) {
            throw new Exception('User not found');
@@ -36,10 +37,13 @@ class AuthService
 
     public function register(array $data): User
     {
-        return $this->userRepository->create(
-            $data['name'], 
-            $data['email'], 
-            Hash::make($data['password'],
-        ));
+        /** @var User $user */
+        $user = $this->userRepository->create([
+            'name' => $data['name'], 
+            'email' => $data['email'], 
+            'password' => Hash::make($data['password']),
+        ]);
+
+        return $user;
     }
 }

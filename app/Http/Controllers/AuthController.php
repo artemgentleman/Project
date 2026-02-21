@@ -6,13 +6,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
-use App\Services\AuthService;
+use App\Services\IAuthService;
 use Exception;
 use Illuminate\Http\JsonResponse;
 
 class AuthController extends Controller
 {
-    public function __construct(public AuthService $authService)
+    public function __construct(public IAuthService $authService)
     {
         $this->authService = $authService;
     }
