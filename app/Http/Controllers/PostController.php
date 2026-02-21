@@ -5,17 +5,17 @@ declare(strict_types= 1);
 namespace App\Http\Controllers;
 
 use App\Models\Post;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Contracts\View\View;
 
 class PostController extends Controller
 {
-    public function index(): Collection
+    public function index(): View
     {
-        return Post::all();
+        return view('posts.index', ['posts' => Post::all()]);
     }
 
-    public function show(int $postId): ?Post
+    public function show(int $postId): View
     {
-        return Post::find($postId);
+        return view('posts.show', ['post'=> Post::find($postId)]);
     }
 }
