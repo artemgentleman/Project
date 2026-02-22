@@ -13,6 +13,7 @@ class AppServiceProvider extends ServiceProvider
      * Register any application services.
      */
     public function register(): void
+    
     {
         $this->app->singleton(IAuthService::class, function (Application $app) {
             return new AuthService(new UserRepository());
