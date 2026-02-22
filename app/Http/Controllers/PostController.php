@@ -21,7 +21,7 @@ class PostController extends Controller
         return view('posts.show', ['post'=> Post::find($postId)]);
     }
 
-    public function edit(EditPostRequest $request): View
+    public function edit(EditPostRequest $request): void
     {
         EditPostJob::dispatch($request->validated());
     }
