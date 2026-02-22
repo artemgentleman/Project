@@ -13,12 +13,12 @@ class PostController extends Controller
 {
     public function index(): View
     {
-        return view('posts.index', ['posts' => Post::all()]);
+        return view('post.index', ['posts' => Post::all()]);
     }
 
     public function show(int $postId): View
     {
-        return view('posts.show', ['post'=> Post::find($postId)]);
+        return view('post.show', ['post'=> Post::find($postId)]);
     }
 
     public function edit(EditPostRequest $request): void
