@@ -13,5 +13,8 @@ Route::get('/', function () {
 Route::get('/register', [AuthController::class, 'register']);
 Route::get('/login', [AuthController::class, 'login']);
 
-Route::get('/posts', [PostController::class,'index']);
-Route::get('/posts/{id}', [PostController::class, 'show']);
+Route::group(['prefix'=> 'posts'], function () {
+    Route::get('/', [PostController::class,'index']);
+    Route::get('/{id}', [PostController::class, 'show']);
+    Route::get('/edit', [PostController::class, 'edit']);
+});

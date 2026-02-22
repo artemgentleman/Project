@@ -4,6 +4,8 @@ declare(strict_types= 1);
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EditPostRequest;
+use App\Jobs\EditPostJob;
 use App\Models\Post;
 use Illuminate\Contracts\View\View;
 
@@ -19,8 +21,8 @@ class PostController extends Controller
         return view('posts.show', ['post'=> Post::find($postId)]);
     }
 
-    public function edit(int $postId)
+    public function edit(EditPostRequest $request): View
     {
-        
+        EditPostJob::dispatch($request->validated());
     }
 }
