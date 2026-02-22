@@ -10,11 +10,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/register', [AuthController::class, 'register']);
-Route::get('/login', [AuthController::class, 'login']);
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
 
 Route::group(['prefix'=> 'posts'], function () {
     Route::get('/', [PostController::class,'index']);
     Route::get('/{id}', [PostController::class, 'show']);
-    Route::get('/edit', [PostController::class, 'edit']);
+    Route::post('/edit', [PostController::class, 'edit']);
 });
