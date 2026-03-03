@@ -35,7 +35,7 @@ class AuthService implements IAuthService
         return $user->createToken('api-token')->plainTextToken;
     }
 
-    public function register(array $data): User
+    public function register(array $data): string
     {
         /** @var User $user */
         $user = $this->userRepository->create([
@@ -44,6 +44,6 @@ class AuthService implements IAuthService
             'password' => Hash::make($data['password']),
         ]);
 
-        return $user;
+        return $user->createToken('api-token')->plainTextToken;
     }
 }

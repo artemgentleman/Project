@@ -39,12 +39,20 @@ class AuthController extends Controller
     {
         try {
             return response()->json([
-                'user' => $this->authService->register($request->validated()),
-            ], 200);
+                'token' => $this->authService->register($request->validated())->,
+            ], 201);
         } catch (Exception $e) {
             return response()->json([
                 'error' => $e->getMessage(),
             ], 401);
         }
+    }
+
+    public function logout(Request $request): JsonResponse
+    {
+        $request->user()->currentAccessToken()->delete();
+        return response()->json([
+            "message" => "Logout successfuly",
+        ]);
     }
 }
