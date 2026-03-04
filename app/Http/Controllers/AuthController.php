@@ -18,10 +18,9 @@ class AuthController extends Controller
 
     public function login(LoginRequest $request): JsonResponse
     {
+        $validated = $request->validated();
         return response()->json([
-            'token' => $this->tryMethod(function () use ($request) {
-                $validated = $request->validated();
-
+            'token' => $this->tryMethod(function () use ($validated) {
                 return $this->authService->login(
                     $validated['email'],
                     $validated['password'],
@@ -32,9 +31,10 @@ class AuthController extends Controller
 
     public function register(RegisterRequest $request): JsonResponse
     {
+        $validated = $request->validated();
         return response()->json([
-            'token' => $this->tryMethod(function () use ($request) {
-                return $this->authService->register($request->validated());
+            'token' => $this->tryMethod(function () use ($validated) {
+                return $this->authService->register($validated);
             }),
         ], 200);
     }
